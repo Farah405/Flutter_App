@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "welcome to login page",
+                  "login page",
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
