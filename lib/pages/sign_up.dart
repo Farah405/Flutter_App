@@ -74,7 +74,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    // 2. تعريف الـ Theme الخاص بالصفحة دي هنا
     final ThemeData localTheme = ThemeData(
       primaryColor: primaryDarkGreen,
       hintColor: primaryDarkGreen,
