@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ProfileScreen(),
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-      ),
-    );
-  }
-}
+import 'package:sakkeny_app/pages/Settings';
+import 'package:sakkeny_app/pages/sign_in.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -23,37 +8,32 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-// Initial selected index for BottomNavigationBar
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 18.0),
           child: Column(
             children: [
-              // Profile picture
+             
               CircleAvatar(
                 radius: 44,
                 backgroundImage: NetworkImage(
-                    'https://i.pravatar.cc/150?img=3'), // Replace with your image URL
+                    'https://i.pravatar.cc/150?img=3'),
               ),
               SizedBox(height: 14),
-              // Name Text
+
+             
               Text(
                 "Arlene McCoy",
                 style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black87),
+                    fontSize: 18, fontWeight: FontWeight.w700, color: Colors.black87),
               ),
               SizedBox(height: 6),
-              // HomeFinder Chip
+
+              
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
@@ -70,7 +50,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(height: 30),
-              // Menu items
+
+              
               Expanded(
                 child: ListView(
                   children: [
@@ -78,38 +59,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       icon: Icons.person_outline,
                       text: "My Account",
                       iconColor: Colors.deepPurple[100]!,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => MyAccountPage()),
+                        );
+                      },
                     ),
                     buildMenuItem(
-                      icon: Icons.settings_outlined,
-                      text: "Settings",
+                      icon: Icons.notifications_outlined,
+                      text: "Notifications",
                       iconColor: Colors.deepPurple[100]!,
-                      onTap: () {},
-                    ),
-                    buildMenuItem(
-                      icon: Icons.apartment_outlined,
-                      text: "Apartment",
-                      iconColor: Colors.deepPurple[100]!,
-                      onTap: () {},
-                    ),
-                    buildMenuItem(
-                      icon: Icons.credit_card_outlined,
-                      text: "My Payments",
-                      iconColor: Colors.deepPurple[100]!,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => NotificationsPage()),
+                        );
+                      },
                     ),
                     buildMenuItem(
                       icon: Icons.headset_mic_outlined,
                       text: "Support",
                       iconColor: Colors.deepPurple[100]!,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => SupportPage()),
+                        );
+                      },
+                    ),
+                    buildMenuItem(
+                      icon: Icons.settings_outlined,
+                      text: "Settings",
+                      iconColor: Colors.deepPurple[100]!,
+                      onTap: () 
+                      {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => SettingsPage()),
+                        );
+                      },
                     ),
                     buildMenuItem(
                       icon: Icons.logout,
                       text: "Logout",
                       iconColor: Colors.red,
                       textColor: Colors.red,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => SignIn()));
+                      },
                     ),
                   ],
                 ),
@@ -145,3 +143,177 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 }
+// Simple placeholder page for "My Account" navigation target
+class MyAccountPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My Account'),
+      ),
+      body: Center(child: Text('My Account Page')),
+    );
+  }
+}
+class NotificationsPage extends StatelessWidget {
+  final Color primary = Color(0xFF1B3C2E);
+  final Color accent = Color(0xFFD2B48C);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: primary,
+        title: Text("Notifications"),
+        foregroundColor: Colors.white,
+      ),
+      body: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          _buildNotification(
+            "Tour Booked Successfully",
+            "Your house tour has been confirmed!",
+            "1h ago",
+            primary,
+          ),
+          _buildNotification(
+            "Exclusive Offers Inside",
+            "Check out new rental offers near you.",
+            "1h ago",
+            primary,
+          ),
+          _buildNotification(
+            "Property Review Request",
+            "Please leave a review for your recent visit.",
+            "2h ago",
+            primary,
+          ),
+          SizedBox(height: 10),
+          Text("Yesterday", style: TextStyle(color: Colors.grey)),
+          _buildNotification(
+            "Tour Request Accepted",
+            "The owner approved your tour request.",
+            "1d ago",
+            accent,
+          ),
+          _buildNotification(
+            "New Payment Added",
+            "Your new payment method is saved.",
+            "1d ago",
+            accent,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNotification(
+      String title, String subtitle, String time, Color iconColor) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 22,
+            backgroundColor: iconColor.withOpacity(0.2),
+            child: Icon(Icons.notifications, color: iconColor),
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                SizedBox(height: 4),
+                Text(subtitle, style: TextStyle(color: Colors.black54)),
+              ],
+            ),
+          ),
+          Text(time, style: TextStyle(color: Colors.grey)),
+        ],
+      ),
+    );
+  }
+}
+class SupportPage extends StatelessWidget {
+  final Color primary = Color(0xFF1B3C2E);
+  final Color accent = Color(0xFFD2B48C); 
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: primary,
+        title: Text("FAQ & Support"),
+        foregroundColor: Colors.white,
+      ),
+      body: ListView(
+        padding: EdgeInsets.all(20),
+        children: [
+          Text(
+            "Didn’t find the answer you were looking for?",
+            style: TextStyle(color: Colors.black87),
+          ),
+          SizedBox(height: 10),
+
+          _buildSupportItem(Icons.language, "Go to our Website"),
+          _buildSupportItem(Icons.email_outlined, "Email Us"),
+          _buildSupportItem(Icons.description_outlined, "Terms of Service"),
+
+          SizedBox(height: 20),
+
+          TextField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search, color: primary),
+              hintText: "Find question...",
+              filled: true,
+              fillColor: Colors.grey[200],
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+
+          SizedBox(height: 20),
+          _buildFAQ("How do I change my password?",
+              "Go to menu → Profile → Change Password."),
+          _buildFAQ("How to change my profile status?",
+              "Open Profile → Edit Status → Save."),
+          _buildFAQ("How to export contacts?",
+              "Open Settings → Export → Choose format."),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSupportItem(IconData icon, String text) {
+    return ListTile(
+      leading: Icon(icon, color: accent),
+      title: Text(text),
+      trailing: Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+    );
+  }
+
+  Widget _buildFAQ(String q, String a) {
+    return ExpansionTile(
+      title: Text(q, style: TextStyle(fontWeight: FontWeight.bold)),
+      children: [
+        Padding(
+          padding: EdgeInsets.all(12),
+          child: Text(a, style: TextStyle(color: Colors.black54)),
+        )
+      ],
+    );
+  }
+}
+
+

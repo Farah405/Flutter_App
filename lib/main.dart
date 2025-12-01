@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sakkeny_app/pages/HomePage.dart';
 import 'package:sakkeny_app/pages/splash_screen.dart';
 
 void main() {

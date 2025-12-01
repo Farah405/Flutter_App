@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sakkeny_app/pages/HomePage.dart';
 import 'package:sakkeny_app/pages/MessagesPage.dart';
-import 'package:sakkeny_app/pages/SearchPage.dart';
 import 'package:sakkeny_app/pages/profile.dart';
 
 // --- CUSTOM COLORS AND THEME EXTENSION ---
